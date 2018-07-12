@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id "jaci.openrio.gradle.GradleRIO" version "2018.03.06"
+}
+
+group 'frc'
+version '1.0-SNAPSHOT'
+
+
+def TEAM = 7021
+def ROBOT_CLASS = "frc.team7021.robot.Robot"
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile wpilib()
+    compile ctre()
+    compile navx()
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest jaci.openrio.gradle.GradleRIOPlugin.javaManifest(ROBOT_CLASS)
+}

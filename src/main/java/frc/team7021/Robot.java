@@ -12,7 +12,7 @@ public class Robot extends IterativeRobot {
     TalonSRX motor3 = new TalonSRX(2);
     TalonSRX motor4 = new TalonSRX(3);
 
-    ITrajectory trajectory = new Trajectory();
+    ITrajectory trajectory = new BasicTrajectory();
 
     public void setSpeed(double left, double right) {
         // Make sure the speeds aren't higher than 1

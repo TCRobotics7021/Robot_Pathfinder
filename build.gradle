@@ -8,7 +8,20 @@ version '1.0-SNAPSHOT'
 
 
 def TEAM = 7021
-def ROBOT_CLASS = "frc.team7021.robot.Robot"
+def ROBOT_CLASS = "frc.team7021.Robot"
+
+deploy {
+    targets {
+        target("roborio", jaci.openrio.gradle.frc.RoboRIO) {
+            team = TEAM
+        }
+    }
+    artifacts {
+        artifact('frcJava', jaci.openrio.gradle.frc.FRCJavaArtifact) {
+            targets << "roborio"
+        }
+    }
+}
 
 
 sourceCompatibility = 1.8

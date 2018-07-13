@@ -12,18 +12,18 @@ public class Robot extends IterativeRobot {
     TalonSRX motor3 = new TalonSRX(2);
     TalonSRX motor4 = new TalonSRX(3);
 
-    ITrajectory trajectory = new BasicTrajectory();
+    ITrajectory trajectory;
 
     public void setSpeed(double left, double right) {
         // Make sure the speeds aren't higher than 1
-        left = Math.min(left, 1);
-        right = Math.min(right, 1);
+        left = Math.max(-1, Math.min(left, 1));
+        right = Math.max(-1, Math.min(right, 1));
 
-        motor1.set(ControlMode.PercentOutput, left);
-        motor2.set(ControlMode.PercentOutput, left);
+        motor1.set(ControlMode.PercentOutput, -left);
+        motor2.set(ControlMode.PercentOutput, -left);
 
-        motor3.set(ControlMode.PercentOutput, -right);
-        motor4.set(ControlMode.PercentOutput, -right);
+        motor3.set(ControlMode.PercentOutput, right);
+        motor4.set(ControlMode.PercentOutput, right);
     }
 
     public void encConfig() {
@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        trajectory = new BasicTrajectory();
         encConfig();
     }
 
